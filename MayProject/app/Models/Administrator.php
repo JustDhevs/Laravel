@@ -10,6 +10,6 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Administrator extends Authenticatable
 {
-    use HasFactory, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
+    protected $hidden = ['id', 'password'];
 }
-

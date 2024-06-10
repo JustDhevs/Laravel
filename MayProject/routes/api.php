@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,5 +25,12 @@ Route::prefix('v1')->group(function(){
         Route::post('/signin', [AuthController::class, 'signin']);
         Route::post('/signup', [AuthController::class, 'signup']);
         Route::post('/signout', [AuthController::class, 'signout'])->middleware('auth:sanctum');
+    });
+
+    Route::middleware('auth:sanctum')->group(function(){
+        Route::get('/admins', [AdminController::class, 'getAdmin']);
+        Route::post('/users', [AdminController::class, 'addUser']);
+        Route::get('/users', [AdminController::class, 'userList']);
+        Route::get('/users', [AdminController::class, 'updateUser']);
     });
 });
